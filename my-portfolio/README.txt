@@ -1,4 +1,4 @@
-YOUR PORTFOLIO — PHP (NO DATABASE)
+RICAMAE GABAY — PERSONAL PORTFOLIO (PHP, NO DATABASE)
 
 REQUIREMENTS
 - XAMPP (Apache)
@@ -12,12 +12,40 @@ HOW TO RUN WITH XAMPP
 3. Open the XAMPP Control Panel and start Apache.
 4. Visit: http://localhost/my-portfolio/
 
+PROJECT FILES
+- index.php              Main page (hero, about, projects, skills, contact)
+- includes/header.php    Site header and navigation
+- includes/footer.php    Site footer
+- images/                Profile photos used by the hero and ID card
+- (CSS / JS files, if separated)
+
 CUSTOMIZE YOUR DETAILS
-- Open index.php and replace every "Your Name" / "YOUR NAME" placeholder.
-- Replace your.email@example.com with your preferred email address.
-- Update the About Me paragraph, skills array, and projects array in index.php.
-- The hero portrait is currently a stylized initials placeholder (YN). Replace the portrait-placeholder block in index.php with an <img> tag if you want to use your own photo.
+- All site content lives in index.php:
+  * $pageTitle / $activePage  — page title and active nav link
+  * $photoPath                — hero photo path (default: images/profile.jpg)
+  * $projects                 — array that generates the project cards
+  * $skills                   — array that generates the skill list
+- About Me paragraph is in the <section id="about"> block of index.php.
+- Contact button uses a mailto link — replace your.email@example.com
+  in the <section id="contact"> block.
 - Update the footer name in includes/footer.php.
+- ID card photo is set in the hero section:
+  <img src="images/my-profile-pic.jpg" ... class="profile-image">
+  Replace this file with your own photo.
+
+PROJECTS ARRAY
+Each project card is generated from an entry in $projects:
+  'number'      → card label ("PROJECT 01")
+  'name'        → project title
+  'type'        → small type/category line
+  'description' → short description
+  'tags'        → array of tag chips
+  'symbol'      → emoji/icon shown on the visual
+  'tone'        → card color: 'pink' | 'aqua' | 'yellow'
+
+SKILLS ARRAY
+Edit $skills in index.php; numbering (01, 02, ...) is generated
+automatically from the array index.
 
 COLOR PALETTE
 - Coral pink: #F18F91
@@ -26,7 +54,10 @@ COLOR PALETTE
 - Light aqua: #D5F7F4
 
 NOTES
-- No database is required.
-- Project cards are generated from a PHP array in index.php.
-- The contact button currently opens the visitor's email app using a mailto link. Replace the sample email address.
-- Google Fonts are loaded online; system fallback fonts are used if offline.
+- No database is required; everything is static PHP + HTML/CSS.
+- Project cards are output with htmlspecialchars() — keep that when
+  editing content to avoid broken markup.
+- Image path check: the hero uses images/profile.jpg ($photoPath),
+  while the ID card uses images/my-profile-pic.jpg. Make sure both
+  files exist in the images/ folder (or point both to one photo).
+- Google Fonts are loaded online; system fallback fonts are used offline.
